@@ -1,0 +1,812 @@
+/********** Template CSS **********/
+:root {
+    --primary: #86B817;
+    --secondary: #FE8800;
+    --light: #F5F5F5;
+    --dark: #14141F;
+}
+
+.fw-medium {
+    font-weight: 600 !important;
+}
+
+.fw-semi-bold {
+    font-weight: 700 !important;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}
+
+
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*** Button ***/
+.btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    transition: .5s;
+}
+
+.btn.btn-primary,
+.btn.btn-secondary {
+    color: #FFFFFF;
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    border-radius: 0px;
+}
+
+
+/*** Navbar ***/
+.navbar-light .navbar-nav .nav-link {
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    margin-right: 25px;
+    padding: 35px 0;
+    color: #FFFFFF !important;
+    font-size: 18px;
+    font-weight: 600;
+    outline: none;
+    transition: .5s;
+}
+
+.sticky-top.navbar-light .navbar-nav .nav-link {
+    padding: 20px 0;
+    color: var(--dark) !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary) !important;
+}
+
+.navbar-light .navbar-brand img {
+    max-height: 60px;
+    transition: .5s;
+}
+
+.sticky-top.navbar-light .navbar-brand img {
+    max-height: 45px;
+}
+
+@media (max-width: 991.98px) {
+    .sticky-top.navbar-light {
+        position: relative;
+        background: #FFFFFF;
+    }
+
+    .navbar-light .navbar-collapse {
+        margin-top: 15px;
+        border-top: 1px solid #DDDDDD;
+    }
+
+    .navbar-light .navbar-nav .nav-link,
+    .sticky-top.navbar-light .navbar-nav .nav-link {
+        padding: 10px 0;
+        margin-left: 0;
+        color: var(--dark) !important;
+    }
+
+    .navbar-light .navbar-brand img {
+        max-height: 45px;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-light {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, .1);
+        z-index: 999;
+    }
+    
+    .sticky-top.navbar-light {
+        position: fixed;
+        background: #FFFFFF;
+    }
+
+    .navbar-light .navbar-nav .nav-link::before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 2px;
+        bottom: -1px;
+        left: 50%;
+        background: var(--primary);
+        transition: .5s;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover::before,
+    .navbar-light .navbar-nav .nav-link.active::before {
+        width: calc(100% - 2px);
+        left: 1px;
+    }
+
+    .navbar-light .navbar-nav .nav-link.nav-contact::before {
+        display: none;
+    }
+}
+
+
+/*** Hero Header ***/
+.hero-header {
+    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../img/hiking-men-conquer-mountain-peak-adventure-awaits-generative-ai.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.story-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-btn {
+    border: 2px solid #86B817; /* Initial border color */
+    border-radius: 30px; /* Rounded border */
+    color: #86B817; /* Text color */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.custom-btn:hover {
+    background-color: #86B817; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, .5);
+}
+
+
+/*** Section Title ***/
+.section-title {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.section-title::before {
+    position: absolute;
+    content: "";
+    width: calc(100% + 80px);
+    height: 2px;
+    top: 4px;
+    left: -40px;
+    background: var(--primary);
+    z-index: -1;
+}
+
+.section-title::after {
+    position: absolute;
+    content: "";
+    width: calc(100% + 120px);
+    height: 2px;
+    bottom: 5px;
+    left: -60px;
+    background: var(--primary);
+    z-index: -1;
+}
+
+.section-title.text-start::before {
+    width: calc(100% + 40px);
+    left: 0;
+}
+
+.section-title.text-start::after {
+    width: calc(100% + 60px);
+    left: 0;
+}
+
+
+/*** Service ***/
+.service-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    transition: .5s;
+}
+
+.service-item:hover {
+    background: var(--primary);
+}
+
+.service-item * {
+    transition: .5s;
+}
+
+.service-item:hover * {
+    color: var(--light) !important;
+}
+
+
+/*** Destination ***/
+.destination img {
+    transition: .5s;
+}
+
+.destination a:hover img {
+    transform: scale(1.1);
+}
+
+
+/*** Package ***/
+.package-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+}
+
+.package-item img {
+    width: 100%;
+      height: auto;
+    transition: .5s;
+}
+
+.glide__arrow {
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 15px; /* Adjust as needed */
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  }
+  .glide__arrow--left {
+    left: -100px; /* Adjust as needed */
+    top: -300px;
+  }
+  .glide__arrow--right {
+    right: -100px; /* Adjust as needed */
+    top: -300px;
+  }
+  .glide__arrows {
+    position: relative;
+  }
+
+.package-item:hover img {
+    transform: scale(1.1);
+}
+
+
+/*** Booking ***/
+.booking {
+    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/booking.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.booking {
+    position: relative;
+}
+
+.booking-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/booking.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    animation: zoomInOut 10s infinite alternate; /* Adjust the duration and timing function as needed */
+}
+
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1); /* Initial scale */
+    }
+    50% {
+        transform: scale(1.1); /* Zoom in */
+    }
+    100% {
+        transform: scale(1); /* Zoom out */
+    }
+}
+
+
+/*** Team ***/
+.team-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    width: 200px; /* Adjust the width as needed */
+    height:  200px; /* Adjust the height as needed */
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+  
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ensure the text overlay spans the full width of the image */
+     /* Adjust the background color and opacity as needed */
+    color: white; /* Text color */
+    height: 50%; /* Adjust the height of the overlay as needed */
+    background: linear-gradient(180deg, rgba(1, 245, 1, 0) 05.06%, rgba(13, 13, 13, 0.74)); /* Adjust the gradient colors and stops */
+}
+
+
+
+
+.team-item .text-overlay h5 {
+    color: white;
+}
+
+
+
+.text-center {
+    padding: 10px; /* Add padding for better readability */
+}
+
+.team-item:hover .text-overlay {
+    opacity: 1; /* Show the text overlay on hover */
+}
+
+.team-item img {
+    transition: .5s;
+    width: 100%; /* Make the image width cover the parent container */
+    height:100%; /* Maintain aspect ratio */
+}
+
+.team-item:hover img {
+    transform: scale(1.1);
+}
+
+.team-item .btn {
+    background: #FFFFFF;
+    color: var(--primary);
+    border-radius: 20px;
+    border-bottom: 1px solid var(--primary);
+}
+
+.team-item .btn:hover {
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
+
+/*** Testimonial ***/
+.testimonial-carousel::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+}
+
+.testimonial-carousel::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .testimonial-carousel::before,
+    .testimonial-carousel::after {
+        width: 200px;
+    }
+}
+
+@media (min-width: 992px) {
+    .testimonial-carousel::before,
+    .testimonial-carousel::after {
+        width: 300px;
+    }
+}
+
+.testimonial-carousel .owl-item .testimonial-item,
+.testimonial-carousel .owl-item.center .testimonial-item * {
+    transition: .5s;
+}
+
+.testimonial-carousel .owl-item.center .testimonial-item {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.testimonial-carousel .owl-item.center .testimonial-item * {
+    color: #FFFFFF !important;
+}
+
+.testimonial-carousel .owl-dots {
+    margin-top: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.testimonial-carousel .owl-dot {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 15px;
+    transition: .5s;
+}
+
+.testimonial-carousel .owl-dot.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+
+/*** Footer ***/
+.footer .btn.btn-social {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    font-weight: normal;
+    border: 1px solid #FFFFFF;
+    border-radius: 35px;
+    transition: .3s;
+}
+
+.footer .btn.btn-social:hover {
+    color: var(--primary);
+}
+
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: left;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: capitalize;
+    transition: .3s;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+    letter-spacing: 1px;
+    box-shadow: none;
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 15px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: var(--light);
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+.wrapper-explore {
+    background-color: #f9f9f9; /* Change to your desired background color */
+}
+
+
+.package-item {
+    position: relative;
+}
+
+.read-more {
+    position: absolute;
+    top: 260px;
+    left: 80px;
+    transform: translateX(-50%);
+    z-index: 1; /* Ensure the button appears on top of the image */
+}
+
+.custom-icons {
+    position: absolute;
+    top: -45px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+}
+
+.wishlist-icon {
+    position: absolute;
+    top: -45px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+}
+
+.container-xxl {
+    max-width: 1140px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navigation-points .point {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.discount-offer {
+    padding: 120px 0;
+    position: relative;
+    background: url(../img/pexels-photo-1673973.jpeg)no-repeat center fixed;
+    background-size: cover;
+    z-index: 1;
+}
+.discount-offer:after,.subscribe:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: #fff(242, 242, 242, 0.5);
+    z-index: -1;
+}
+
+.dicount-offer-content h2{
+    color:#fff;
+    font-size:30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.display-1{
+
+    color:#100e0e;
+    font-size:30px;
+    font-family: "Think-Pink", "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 500;
+    line-height: 1.4;
+
+}
+
+
+
+
+
+.container1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.left-section {
+    width: 50%;
+    display: flex; /* Make left section a flex container */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.right-section {
+    width: 50%;
+}
+
+.header {
+    text-align: center;
+}
+
+.poster-name {
+    margin-top: 20px;
+}
+
+.image-slider {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-slider img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.image-slider img.active {
+    opacity: 1;
+}
+
+
+.slider-container {
+    width: 100%; /* Full width */
+    overflow: hidden; /* Hide overflow */
+}
+
+.slides {
+    display: flex; /* Set display to flex */
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+}
+
+.slides img {
+    width: 100%; /* Full width of container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.stories-shared-icon {
+    position: absolute;
+    top: -45px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    color: white;
+}
+
+ 
+
+.cat-text-overlay {
+    position: absolute;
+    bottom: 0; /* Position the overlay at the bottom */
+    left: 0;
+    width: 100%;
+    height: 50%; /* Adjust the height of the overlay as needed */
+    background: linear-gradient(180deg, rgba(29, 31, 29, 0) 57.06%, rgba(29, 31, 29, 0.74)); /* Adjust the gradient colors and stops */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    color: white;
+}
+
+.cat-image-container:hover .cat-text-overlay {
+    opacity: 1;
+}
+
+.cat-text-center {
+    color: white; /* Change text color as needed */
+    padding : 10px;
+}
+
+.transparent-input {
+    background-color: transparent;
+    border: 1px solid white;
+    
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px; /* adjust this value to the desired width */
+  }
+
+
+
+.larger-text {
+    font-size: 1.2em; /* Adjust the font size as needed */
+    text-align: center; /* Center alignment */
+}
+
+.smaller-text {
+    font-size: .65em; /* Default font size */
+    text-align: center; /* Center alignment */
+}
+
+.modal-dialog {
+    max-width: 50vw;
+}
+.modal-content {
+    border: none;
+}
+.modal-body {
+    padding: 0;
+}
+.modal-body .carousel-item img {
+   
+    width: 50px;
+        height: 450px;
+        object-fit: cover;
+      
+}
+
+.modal-header {
+    background-color: transparent !important;
+    border: none;
+}
+
+#right-side-item-container {
+    position: fixed;
+    top: 10%;
+    right: -1800px; /* Adjust as needed */
+    transform: translateY(-10%);
+   
+    
+    
+}
+
+#right-side-item-container ul {
+    list-style-type: none; /* Remove bullet points from the list */
+}
+
+#right-side-item-container ul li {
+    border-bottom: 1px solid  #6b9312;
+    padding-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.container-custom {
+    max-height: 200px; /* Set maximum width */
+    margin-right: auto; /* Center container horizontally */
+    margin-left: auto;
+}
+
+
+

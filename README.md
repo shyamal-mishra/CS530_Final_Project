@@ -1,1 +1,2 @@
-# CS530_Final_Project
+# UI-Project
+CS530-Final project

@@ -1,0 +1,218 @@
+.profile-container{
+    display: flex;
+}
+
+.header {
+    display: flex;
+    padding : 6px;
+    border-bottom: 1px solid #ccc; /* Add border to the bottom of the header */
+    /*padding-bottom: 10px;*/
+   /* Add some space between the border and the options */
+}
+
+
+.header {
+    display: flex;
+    padding: 6px;
+    border-bottom: 1px solid #ccc; /* Add border to the bottom of the header */
+}
+
+.option {
+    display: flex;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px; /* Add spacing between options */
+}
+
+.option::before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: -2px;
+    right: -2px;
+    border-bottom: 1px solid transparent; /* Invisible bottom border */
+    transition: border-color 0.3s ease; /* Add transition for border color */
+}
+
+.option:hover::before {
+    border-color: #86b817; /* Border color on hover */
+}
+
+
+
+
+
+
+.box {
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(196, 44, 44, 0.1); /* Adding shadow effect */
+    display: inline-block;
+}
+
+.left-box {
+    border-radius: 10px; 
+    width: 320px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed *//* Initial width of left box */
+    background-color: #ffffff; /* Example background color for left box */
+    margin-right: 20px;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(9, 18, 18, 0.1); /* Adding shadow effect */
+}
+
+.right-box {
+    border-radius: 10px; 
+    padding: 20px;
+    width: 700px; /* Adjust the width as needed */
+    height: 500px; /* Adjust the height as needed */
+    background-color: #ffffff; /* Example background color for right box */
+    box-shadow: 0 0 10px rgba(19, 18, 18, 0.1); /* Adding shadow effect */
+}
+
+.section {
+    display: none; /* Initially hide all sections */
+}
+
+
+.photos {
+    padding : 8px;
+    display: flex;
+    flex-wrap: wrap; /* Allow photos to wrap to the next row */
+    gap: 10px; /* Add spacing between photos */
+}
+
+.photo {
+    width: calc(33.33% - 10px); /* Set width of each photo to occupy one-third of the container minus the gap */
+    height: 200px; /* Set height of each photo */
+    background-color: #f0f0f0; /* Example background color for photos */
+    border-radius: 4px; /* Add rounded corners to photos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo img {
+    width: 100%; /* Ensure images fill the entire container */
+    height: 100%; /* Ensure images fill the entire container */
+    object-fit: cover; /* Maintain aspect ratio and cover entire container */
+}
+
+.profile-picture {
+    width: 100px; /* Adjust the width of the profile picture container */
+    height: 100px; /* Adjust the height of the profile picture container */
+    border-radius: 50%; /* Make the profile picture container round */
+    overflow: hidden; /* Hide any content that overflows the container */
+    background-color: #f0f0f0; /* Background color for the container */
+}
+
+.profile-picture img {
+    width: 100%; /* Make the image fill the entire container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.option:hover h6 {
+    color: #86b817; /* Change text color on hover */
+}
+
+
+#emailField {
+    display: block;
+}
+
+#otpField {
+    display: none;
+}
+
+
+
+.suboptions-container {
+    display: flex;
+   /* Adjust alignment as needed */
+    /* Add any other styling specific to your design */
+   
+}
+
+.suboption {
+    /* Add any specific styling for suboptions */
+    padding: 8px 80px;/* Add padding to all sides */
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f3f6f2;
+}
+
+.suboption2 {
+    /* Add any specific styling for suboptions */
+    padding: 8px 80px;/* Add padding to all sides */
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f7fcfc;
+}
+
+.partition {
+    width: 2px; /* Adjust the width of the partition */
+    background-color: #ccc; /* Customize the color of the partition */
+    /* You can also use other properties like border, margin, etc. to style the partition */
+}
+
+
+.section {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.suboptions-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.suboption, .suboption2 {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.trips-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.trip {
+    width: calc(50% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.trip-details h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.trip-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.trip-status {
+    margin-left: auto;
+}
+
+.trip-status h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+}
+
+
+
+
