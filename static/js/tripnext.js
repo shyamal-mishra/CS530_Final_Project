@@ -177,32 +177,79 @@
                 type: 'POST',
                 url: '/save-trip-details', // Endpoint to handle saving trip details
                 data: { tripName: tripName, date: tripDate },
-                success: function (response) {
-                    if (response.success) {
-                        // Handle success
-
-                        showPopup();
-                    } else {
-                        // Handle failure
-                        openLoginPopup();
-                        // For example, display an error message to the user
-                    }
+                success: function(response) {
+                    // Handle success response
+                    console.log('Trip details saved successfully:', response);
+                    showPopup();
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     // Handle error response
-                    openLoginPopup();
+                    console.error('Error saving trip details:', error);
                 }
             });
         });
     });
 
 
-    function openLoginPopup() {
-        // Get the login popup element
-        var loginPopup = document.getElementById('loginPopup');
+    document.addEventListener("DOMContentLoaded", function () {
+        var navLinks = document.querySelectorAll(".nav-link");
 
-        // Display the login popup
-        loginPopup.style.display = 'block';
+        navLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinks.forEach(function (navLink) {
+                    navLink.classList.remove("active");
+                });
+                this.classList.add("active");
+            });
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('printGearListBtn').addEventListener('click', function () {
+            window.print();
+        });
+    });
+    
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the button element
+        var showItineraryBtn = document.getElementById('showItineraryBtn');
+
+        // Get all itinerary days
+        var itineraryDays = document.querySelectorAll('.itinerary__day');
+
+        // Hide all itinerary days except the first one
+        for (var i = 1; i < itineraryDays.length; i++) { // Start loop at 1 to skip the first day
+            itineraryDays[i].style.display = "none";
+        }
+
+        // Listen for click event on the button
+        showItineraryBtn.addEventListener('click', function () {
+            // Toggle visibility for all days except the first one
+            for (var i = 1; i < itineraryDays.length; i++) { // Start loop at 1 to skip the first day
+                if (itineraryDays[i].style.display === "none") {
+                    itineraryDays[i].style.display = "block";
+                } else {
+                    itineraryDays[i].style.display = "none";
+                }
+            }
+
+            // Optionally toggle button text
+            this.textContent = this.textContent === "Show full itinerary" ? "Hide full itinerary" : "Show full itinerary";
+        });
+    });
+
+    function showMonth(month) {
+        var months = document.getElementsByClassName('month-details');
+        for (var i = 0; i < months.length; i++) {
+            months[i].style.display = 'none';
+        }
+        document.getElementById(month).style.display = 'block';
+    }
+
+    function toggleHeart(element) {
+        element.querySelector('i').classList.toggle('heart-red');
     }
 
 

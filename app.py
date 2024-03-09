@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash
 import random
 import string
 from dotenv import load_dotenv
+from flask import session
 
 # Load environment variables from .env file
 load_dotenv()
@@ -477,7 +478,7 @@ def signup():
 def tripnextpage():
     return render_template('tripnextpage.html')
 
-from flask import session
+
 
 @app.route('/save-trip-details', methods=['POST'])
 def save_trip_details():
