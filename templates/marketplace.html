@@ -280,7 +280,33 @@
     </div>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.filter-button');
 
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const category = this.getAttribute('data-category');
+            sortAndRearrangeProducts(category);
+        });
+    });
+});
+
+function sortAndRearrangeProducts(category) {
+    // Your sorting/rearranging logic goes here based on the selected category
+
+    // Add animation class to products
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        product.classList.add('animated');
+        // Remove animation class after animation completes
+        product.addEventListener('animationend', () => {
+            product.classList.remove('animated');
+        });
+    });
+}
+
+</script>
 
 
     <script>
@@ -414,6 +440,11 @@
 
 
     <!-- Back to Top -->
+
+    
+
+
+
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 

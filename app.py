@@ -16,7 +16,7 @@ from datetime import datetime
 
 # Load environment variables from .env file
 load_dotenv()
-api_key = os.getenv("API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
 
 
 app = Flask(__name__)
@@ -359,29 +359,36 @@ def predict():
     data = request.get_json()
     user_message = data['message']
 
-    # Specify the model to use (e.g., text-davinci-003)
-    model_name = 'gpt-3.5-turbo'
-    max_tokens = 50  # Maximum number of tokens in the generated response
+
+    url = "https://api.openai.com/v1/chat/completions"
+    max_tokens = 50
+  
 
     headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + api_key
-    }
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
 
-    payload = {
-        'model': model_name,
-        'prompt': user_message,
-        'max_tokens': max_tokens
-    }
+    data = {
+            "model": "gpt-3.5-turbo",
+            "messages": [{"role": "user", "content": user_message}],
+             "max_tokens": max_tokens
+          
+        }
 
     try:
-        response = requests.post(
-            'https://api.openai.com/v1/completions', headers=headers, json=payload)
-        response_data = response.json()
-        generated_text = response_data['choices'][0]['text'].strip()
-        return jsonify({'answer': generated_text})
+            response = requests.post(url, json=data, headers=headers)
+
+            if response.status_code == 200:
+                result = response.json()
+                completion_text = result['choices'][0]['message']['content']
+                return jsonify({'answer': completion_text})
+            else:
+                return jsonify({'error': str(e)})
     except Exception as e:
-        return jsonify({'error': str(e)})
+            return jsonify({'error': str(e)})
+
+    
 
 
 # Route for the team page

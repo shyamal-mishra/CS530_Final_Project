@@ -195,3 +195,17 @@ function displaySelectedImages(input) {
 }
 
 
+// Assuming you have a function to trigger sorting/rearranging products
+function sortAndRearrangeProducts() {
+    // Your sorting/rearranging logic goes here
+
+    // Add animation class to products
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        product.classList.add('animated');
+        // Remove animation class after animation completes
+        product.addEventListener('animationend', () => {
+            product.classList.remove('animated');
+        });
+    });
+}

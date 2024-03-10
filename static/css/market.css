@@ -148,6 +148,10 @@ main {
     transition: transform 0.3s ease-in-out;
 }
 
+.rotate-90 {
+    transform: rotate(90deg); /* Rotate item 90 degrees */
+}
+
 .product:hover {
     transform: scale(1.05);
 }
@@ -533,4 +537,32 @@ main {
 
 .message {
     color: #666;
+}
+
+
+
+
+
+/* Define animation keyframes */
+@keyframes jig-jag {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Apply animation to product elements */
+.product.animated {
+    animation: jig-jag 0.5s ease-in-out;
 }
