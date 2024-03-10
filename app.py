@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,session
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 import os
@@ -11,6 +11,8 @@ import random
 import string
 from dotenv import load_dotenv
 from flask import session
+import json
+from datetime import datetime
 
 # Load environment variables from .env file
 load_dotenv()
@@ -25,15 +27,15 @@ app.secret_key = 'ui_secret_2024'  # Set a secret key for flash messages
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'uiproject2024@gmail.com'  # Your Gmail email address
-app.config['MAIL_PASSWORD'] = 'ofdh pkvc tonk slco'  # Your Gmail password or App Password
+# Your Gmail email address
+app.config['MAIL_USERNAME'] = 'uiproject2024@gmail.com'
+# Your Gmail password or App Password
+app.config['MAIL_PASSWORD'] = 'ofdh pkvc tonk slco'
 
 mail = Mail(app)
 
 # Absolute path to the database file
 DB_PATH = os.path.join(os.path.dirname(__file__), 'uiflasknew.db')
-
-
 
 
 def create_table_user():
@@ -58,6 +60,8 @@ def create_table_user():
         print("Database connected successfully.")
 
 # Function to create database table if it doesn't exist
+
+
 def create_table():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -69,32 +73,47 @@ def create_table():
                     location TEXT, 
                     story TEXT, 
                     image BLOB)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS notify (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    sender  TEXT, 
+                    body  TEXT, 
+                    datetime TEXT
+                    username TEXT)''')
     conn.commit()
     conn.close()
     print("Database connected successfully.")
 
 # Route for the homepage
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 # Route for the about page
+
+
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+
 @app.route('/home')
 def home():
     return render_template('index.html')
+
 
 @app.route('/loginpage')
 def loginpage():
     return render_template('login.html')
 
 # Route for the booking page
+
+
 @app.route('/trippage2')
 def trippage2():
     return render_template('trippage2.html')
+
 
 @app.route('/trippage3')
 def trippage3():
@@ -111,48 +130,136 @@ def trippage5():
     return render_template('tripnextpage.html')
 
 # Route for the contact page
+
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
 # Route for the destination page
+
+
 @app.route('/destination')
 def destination():
     return render_template('destination.html')
 
 # Route for the package page
+
+
 @app.route('/package')
 def package():
     return render_template('package.html')
 
 # Route for the service page
+
+
 @app.route('/service')
 def service():
     return render_template('service.html')
+
 
 @app.route('/full-story')
 def fullstory():
     return render_template('full-story.html')
 
+
 @app.route('/sample-story')
 def samplestory():
     return render_template('sample-story1.html')
+
 
 @app.route('/sample-story1')
 def samplestory1():
     return render_template('sample-story2.html')
 
+
 @app.route('/sample-story2')
 def samplestory2():
     return render_template('sample-story3.html')
+
 
 @app.route('/bot')
 def chatbot():
     return render_template('bot.html')
 
+
 @app.get("/bot1")
 def index_get():
     return render_template("bot1.html")
+
+@app.get("/marketplace")
+def marketplace():
+    return render_template("marketplace.html",  login_success=True)
+
+
+@app.get("/product")
+
+def product():
+    return render_template("product.html", username=session['username'], email=session['email'], login_success=True)
+
+
+def date_function():
+    current_datetime = datetime.now()
+    return current_datetime
+
+@app.route('/send-message', methods=['POST'])
+def send_message():
+    data = request.json
+    sender = data['sender']
+    recipient = data['recipient']
+    message_body = data['message']
+
+    datetime  = date_function()
+
+    if 'username' in session:
+        # Fetch user details from the database based on the logged-in user
+        username = session['username']
+
+    subject = f"Naturequest: {username} sent a message"
+
+    msg = Message(subject, sender=sender, recipients=[recipient])
+    msg.body = message_body
+    mail.send(msg)
+
+   
+
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute("INSERT INTO notify (recipient, body, username) VALUES (?, ?, ?)",
+                      (recipient, message_body, username))
+    conn.commit()
+   
+    conn.close()
+    try:
+        mail.send(msg)
+        return jsonify({'message': 'Email sent successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/get-notifications', methods=['GET'])
+def getnotifications():
+
+        if 'username' in session:
+            # Fetch user details from the database based on the logged-in user
+        
+            email = session['email']
+
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT id, username, body FROM notify WHERE recipient = ? ORDER BY id DESC", (email,))
+
+        entries = c.fetchall()
+        conn.close()
+
+        if entries:
+                # story, name, datetime,image_base64 = story_data
+             return jsonify(entries)
+        else:
+             return jsonify([])
+
+    
+
 
 
 
@@ -167,53 +274,52 @@ def stories():
             datetime = request.form['datetime']
             location = request.form['location']
             story = request.form['story']
-           
 
             # Check if the request contains the file part
             if 'image' in request.files:
                 file = request.files['image'].read()
-                
+
             conn = sqlite3.connect(DB_PATH)
             c = conn.cursor()
-            c.execute("INSERT INTO stories (name, email, datetime, location, story, image) VALUES (?, ?, ?, ?, ?, ?)", (name, email, datetime, location, story, (sqlite3.Binary(file))))
+            c.execute("INSERT INTO stories (name, email, datetime, location, story, image) VALUES (?, ?, ?, ?, ?, ?)",
+                      (name, email, datetime, location, story, (sqlite3.Binary(file))))
             conn.commit()
-           
+
             print('Data inserted into the database successfully.')
 
-
-            c.execute("SELECT id,name,email,datetime,location,story,image FROM stories ORDER BY id DESC ")
+            c.execute(
+                "SELECT id,name,email,datetime,location,story,image FROM stories ORDER BY id DESC ")
             entries = c.fetchall()
             conn.close()
 
             entries_dict = []
             for entry in entries:
-                    entry_dict = {
-                        'id' : entry[0],
-                        'name': entry[1] if len(entry) > 0 else None,
-                        'email': entry[2] if len(entry) > 0 else None,
-                        'datetime': entry[3] if len(entry) > 0 else None,
-                        'location': entry[4] if len(entry) > 0 else None,
-                        'story': entry[5] if len(entry) > 0 else None,
-                        'image': base64.b64encode(entry[6]).decode('utf-8') if entry[6] else None
-                    }
-                    entries_dict.append(entry_dict)
-
+                entry_dict = {
+                    'id': entry[0],
+                    'name': entry[1] if len(entry) > 0 else None,
+                    'email': entry[2] if len(entry) > 0 else None,
+                    'datetime': entry[3] if len(entry) > 0 else None,
+                    'location': entry[4] if len(entry) > 0 else None,
+                    'story': entry[5] if len(entry) > 0 else None,
+                    'image': base64.b64encode(entry[6]).decode('utf-8') if entry[6] else None
+                }
+                entries_dict.append(entry_dict)
 
             if entries:
-                #story, name, datetime,image_base64 = story_data
+                # story, name, datetime,image_base64 = story_data
                 return render_template('stories.html',  entries=entries_dict)
             else:
                 return render_template('stories.html', story_text=None, author_name=None, datetime=None)
 
-
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
-            print(f'Database Error: {str(e)}') 
+            print(f'Database Error: {str(e)}')
             return redirect(url_for('stories'))
     else:
-        
+
         return render_template('stories.html')
-    
+
+
 @app.route('/full-story/<int:story_id>')
 def view_story(story_id):
 
@@ -246,13 +352,15 @@ def get_story_by_id(story_id):
 
 
 
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     user_message = data['message']
 
-   
-    model_name = 'gpt-3.5-turbo'  # Specify the model to use (e.g., text-davinci-003)
+    # Specify the model to use (e.g., text-davinci-003)
+    model_name = 'gpt-3.5-turbo'
     max_tokens = 50  # Maximum number of tokens in the generated response
 
     headers = {
@@ -267,29 +375,33 @@ def predict():
     }
 
     try:
-        response = requests.post('https://api.openai.com/v1/completions', headers=headers, json=payload)
+        response = requests.post(
+            'https://api.openai.com/v1/completions', headers=headers, json=payload)
         response_data = response.json()
         generated_text = response_data['choices'][0]['text'].strip()
         return jsonify({'answer': generated_text})
     except Exception as e:
         return jsonify({'error': str(e)})
-  
-    
+
+
 # Route for the team page
 @app.route('/team')
 def team():
     return render_template('team.html')
 
 # Route for the testimonial page
+
+
 @app.route('/testimonial')
 def testimonial():
     return render_template('testimonial.html')
 
 # Route for handling 404 errors
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
-
 
 
 # Route for the login page
@@ -307,8 +419,6 @@ def login():
             c.execute(Q1, (username,))
             user = c.fetchone()
 
-    
-
             if user and user[1] == password:
                 # If user exists and password matches, set the session email and redirect to dashboard
                 session['username'] = username
@@ -317,25 +427,28 @@ def login():
                 return render_template('index.html', login_success=True)
             else:
                 # If user does not exist or password does not match, display error message
-                return  jsonify({'success': False})
+                return jsonify({'success': False})
 
     # If method is not POST or login was unsuccessful, render the login page
     return render_template('index.html', login_success=False)
 
-def get_user_details(username,email):
+
+def get_user_details(username, email):
     # Establish a connection to your database
     with sqlite3.connect(DB_PATH) as conn:
-            c = conn.cursor()
-            c.execute("SELECT * FROM users WHERE username=?", (username,))
-            user_details = c.fetchone()
+        c = conn.cursor()
+        c.execute("SELECT * FROM users WHERE username=?", (username,))
+        user_details = c.fetchone()
 
-            c.execute("SELECT * FROM stories WHERE email=?", (email,))  # Assuming 'user_id' links the tables
-            story_table_details = c.fetchone()
-    
+        # Assuming 'user_id' links the tables
+        c.execute("SELECT * FROM stories WHERE email=?", (email,))
+        story_table_details = c.fetchone()
+
     # Close the database connection
     conn.close()
-    
+
     return user_details, story_table_details
+
 
 @app.route('/profile')
 def profile():
@@ -346,8 +459,8 @@ def profile():
         email = session['email']
         # Perform database query to fetch user details based on username
         # Replace this with your actual database query
-        user_details, story_table_details  = get_user_details(username, email)  # Implement this function
-
+        user_details, story_table_details = get_user_details(
+            username, email)  # Implement this function
 
         if story_table_details is not None:
             # Assuming story_table_details[6] contains the image data
@@ -355,8 +468,8 @@ def profile():
 
             # Convert the image data to base64 encoding
             base64_encoded_image = base64.b64encode(image_data).decode('utf-8')
-            
-        if user_details and  story_table_details:
+
+        if user_details and story_table_details:
             # Render the profile.html template and pass the user details to it
             return render_template('profile.html', user=user_details, story=base64_encoded_image, login_success=True)
         else:
@@ -367,13 +480,17 @@ def profile():
         return redirect(url_for('login'))
 
 # Route for the dashboard page
+
+
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
-        username = session['username']  # Get the logged-in user's email as username
+        # Get the logged-in user's email as username
+        username = session['username']
         return render_template('dashboard.html', username=username)
     else:
-        return render_template('dashboard.html', login_success=False)  # Redirect to login if not logged in
+        # Redirect to login if not logged in
+        return render_template('dashboard.html', login_success=False)
 
 
 # Route for the forgot password page
@@ -387,11 +504,12 @@ def forgot_password():
         # Store the token in the database
         with sqlite3.connect(DB_PATH) as conn:
             c = conn.cursor()
-            c.execute("INSERT INTO password_reset (email, otp) VALUES (?, ?)", (email, otp))
-            
+            c.execute(
+                "INSERT INTO password_reset (email, otp) VALUES (?, ?)", (email, otp))
 
         # Send email with password reset instructions
-        msg = Message('Password Reset OTP', sender='uiproject2024@gmail.com', recipients=[email])
+        msg = Message('Password Reset OTP',
+                      sender='uiproject2024@gmail.com', recipients=[email])
         msg.body = f'Your OTP for password reset is: {otp}'
         mail.send(msg)
 
@@ -399,6 +517,7 @@ def forgot_password():
         return jsonify({'success': True, 'email': email})
 
     return render_template('forgot_password.html')
+
 
 @app.route('/verify-otp', methods=['POST'])
 def verify_otp():
@@ -417,12 +536,10 @@ def verify_otp():
             with sqlite3.connect(DB_PATH) as conn:
                 c = conn.cursor()
                 c.execute("DELETE FROM password_reset WHERE email = ?", (email,))
-            
+
             return jsonify({'success': True, 'message': 'OTP verification successful!', 'email': email})
         else:
             return jsonify({'success': False, 'error_message': 'Invalid OTP. Please try again.'})
-
-
 
 
 @app.route('/reset-password', methods=['POST'])
@@ -430,16 +547,17 @@ def reset_password():
     if request.method == 'POST':
         new_password = request.form['newPassword']
         email = request.form['newPassPopupemail']
-        
+
         # Update the password for the user with the provided email
         with sqlite3.connect(DB_PATH) as conn:
             c = conn.cursor()
             # Update the password in the users table
-            c.execute("UPDATE users SET password=? WHERE email=?", (new_password, email))
+            c.execute("UPDATE users SET password=? WHERE email=?",
+                      (new_password, email))
             # Commit changes to the database
             conn.commit()
-      
-        return render_template('login.html',login_success=False)
+
+        return render_template('login.html', login_success=False)
 
 
 # Route for the signup page
@@ -457,7 +575,7 @@ def signup():
                 c.execute("SELECT * FROM users WHERE email=?", (email,))
                 existing_user = c.fetchone()
                 if existing_user:
-                    flash('Username already exists. Please choose a different one.', 'error')
+                      return jsonify({'message': 'Username already exists. Please choose a different one.'}), 200
                 else:
                     # Insert user data into database
                     c.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
@@ -465,7 +583,7 @@ def signup():
                     conn.commit()  # Commit the transaction
                     flash('User registered successfully!', 'success')
                     print('User registered successfully.')
-                    return render_template('index.html', username=username,login_success=True, first_time_user=True)
+                    return render_template('index.html', username=username, login_success=True, first_time_user=True)
 
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
@@ -477,7 +595,6 @@ def signup():
 @app.route('/tripnextpage')
 def tripnextpage():
     return render_template('tripnextpage.html')
-
 
 
 @app.route('/save-trip-details', methods=['POST'])
@@ -498,14 +615,11 @@ def save_trip_details():
                          WHERE username = ?''', (trip_name, trip_date, username))
             conn.commit()
 
-       
-
         return render_template('tripnextpage.html', success=True)
     else:
-        return render_template('tripnextpage.html', success=True)   # Return a 400 status code for bad request
+        # Return a 400 status code for bad request
+        return render_template('tripnextpage.html', success=True)
 
-    
-    
 
 @app.route('/logout')
 def logout():
@@ -513,6 +627,7 @@ def logout():
     session.clear()
     # Redirect to the login page
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     create_table()

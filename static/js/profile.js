@@ -106,39 +106,7 @@ $('#signupForm').on('submit', function(event) {
 
 
 
-function validatePassword() {
-    var password = document.getElementById('password1').value;
-    var confirm_password = document.getElementById('confirm_password').value;
-    console.log(' pass',password)
-    console.log('confirm pass',confirm_password)
-    
 
-
-    if (password !== confirm_password) {
-        document.getElementById('password_error').style.display = 'block';
-        return false; // Prevent form submission
-    } else {
-        document.getElementById('password_error').style.display = 'none';
-        return true; // Allow form submission
-    }
-}
-
-function validateNewPassword() {
-    var password = document.getElementById('newPassword').value;
-    var confirm_password = document.getElementById('confirmPassword').value;
-    console.log(' pass',password)
-    console.log('confirm pass',confirm_password)
-    
-
-
-    if (password !== confirm_password) {
-        document.getElementById('password_error').style.display = 'block';
-        return false; // Prevent form submission
-    } else {
-        document.getElementById('password_error').style.display = 'none';
-        return true; // Allow form submission
-    }
-}
 
 
 
