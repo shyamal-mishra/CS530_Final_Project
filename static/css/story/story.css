@@ -275,7 +275,7 @@
 
 /*** Booking ***/
 .booking {
-    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/booking.jpg);
+    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/How-to-choose-a-kayak-FlatwaterKayakClub.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -450,15 +450,15 @@
 }
 
 .input-group-text {
-    background-color: darkgreen;
+    background-color: #86B817;
     color: white;
-    border-color: darkgreen;
+    border-color: #86B817;
     cursor: pointer;
 }
 
 .input-group-text:hover {
-    background-color: #006400; /* Darker shade of green on hover */
-    border-color: #006400;
+    background-color: #86B817; /* Darker shade of green on hover */
+    border-color: #86B817;
 }
 
 .form-control {

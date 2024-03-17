@@ -14,7 +14,7 @@ body {
 /* Search bar styles */
 .search-bar {
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@ body {
     border: none;
     padding: 10px 20px;
     border-radius: 20px; /* Set border-radius to round all sides */
-    background-color: #007bff; /* Example background color */
+    background-color: #86B817; /* Example background color */
     color: #fff; /* Example text color */
     cursor: pointer;
 }
@@ -58,16 +58,16 @@ body {
 
 .search-bar button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #86B817;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
 
 .search-bar button:hover {
-    background-color: #0056b3;
+    background-color: #86B817;
 }
 
 /* Main container */
@@ -80,7 +80,7 @@ main {
 /* Left section */
 .left-section {
     flex: 1; /* Adjust flex value */
-    max-width: 200px; /* Adjust max-width */
+    max-width: 300px; /* Adjust max-width */
     padding: 20px;
     background-color: #f9f9f9;
     transition: all 0.3s ease; /* Add transition for smooth animation */
@@ -126,7 +126,7 @@ main {
 /* Products section */
 .products {
     flex: 2;
-    padding: 20px;
+    text-align: center; 
     background-color: #fff;
     animation: fadeInRight 1s ease-in-out;
 }
@@ -141,15 +141,11 @@ main {
 /* Product listing */
 .product {
     margin-bottom: 20px;
-    padding: 20px;
+   
     background-color: #f0f0f0;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-}
-
-.rotate-90 {
-    transform: rotate(90deg); /* Rotate item 90 degrees */
 }
 
 .product:hover {
@@ -169,14 +165,41 @@ main {
 }
 
 .product p {
-    margin-top: 10px;
+ 
     font-size: 16px;
     color: #666;
 }
 
+.products-container-wrap {
+
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding around the container */
+    border: 1px solid var(--nd-color-fgSecondary); /* Add border around the container */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    background-color: #f9f9f9;
+    height: 700px; /* Set the desired height */
+    overflow: auto; 
+}
 
 
+.product-title {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, HelveticaNeue-Medium, "Helvetica Neue Medium", Helvetica-Bold, Roboto-Medium, "Segoe UI Semibold", Arial-Bold, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    margin-top: 0;
+    color: var(--nd-color-fgSecondary);
+}
 
+/* Description styling */
+.product-description {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, HelveticaNeue-Medium, "Helvetica Neue Medium", Helvetica-Bold, Roboto-Medium, "Segoe UI Semibold", Arial-Bold, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    color: var(--nd-color-fgSecondary);
+}
 
 
 .product-container {
@@ -221,7 +244,7 @@ main {
 
 .filter-button {
     display: inline-block;
-    padding: 10px 20px; /* Default padding */
+   
     margin-right: 10px; /* Add spacing between buttons */
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -230,12 +253,14 @@ main {
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    width: 200px; /* Adjust the width as needed */
+    text-align: left; /* Align text to the left */
 }
 
 .filter-button:hover {
-    background-color: #007bff;
+    background-color: #86B817;
     color: #fff;
-    border-color: #007bff;
+    border-color: #86B817;
 }
 
 /* Individual button styles */
@@ -255,8 +280,8 @@ main {
     border-radius: 5px;
     padding: 20px;
     margin-top: 20px;
-    width: 450px; /* Custom width */
-    height: 500px; /* Custom height */
+    width: 500px; /* Custom width */
+    height: 600px; /* Custom height */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
     border-radius: 20px; /* Adding border-radius to create curved corners */
 }
@@ -285,7 +310,7 @@ main {
     padding: 20px;
     margin-top: 20px;
     margin-left: 20px; /* Add spacing between the boxes */
-    width: 400px; /* Custom width */
+    width: 350px; /* Custom width */
     height: 350px; /* Custom height */
    
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
@@ -307,40 +332,33 @@ main {
 }
 
 .user-info {
-    display: flex; /* Use flexbox */
-    align-items: center; /* Align items vertically */
+    display: flex;
+    align-items: center;
 }
 
 .profile-picture img {
-    width: 70px; /* Adjust the size of the profile picture */
-    height: 70px;
-    border-radius: 70%; /* Make the profile picture circular */
-    margin-right: 20px; /* Add some space between the picture and details */
+    width: 50px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image circular */
 }
 
 .info-details {
-    flex-grow: 1; /* Allow details to expand to fill remaining space */
-    margin-left:- 420px; 
-}
-.info-details p{
-    flex-grow: 1; /* Allow details to expand to fill remaining space */
-    margin-right: 120px; 
-}
-
-.vertical-align {
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack items vertically */
-    margin-right: 170px; 
+    margin-left: 10px; /* Adjust as needed */
 }
 
 .vertical-align p {
-    margin: 5px 0; /* Add margin between items */
+    margin: 0; /* Removes default margin */
+    line-height: 1.5; /* Adjust vertical alignment */
 }
 
-.vertical-align p strong {
-    margin-right: 5px; /* Add some space between the label and value */
+.vertical-align p:nth-child(1) {
+    font-size: 1.2em; /* Increase font size for name */
 }
 
+.vertical-align p:nth-child(2) {
+    font-size: 0.8em; /* Decrease font size for location */
+    color: #888; /* Optional: Adjust text color for location */
+}
 
 
 
@@ -408,8 +426,8 @@ main {
 }
 
 .image-container {
-    width: 300px; /* Set a fixed width for the container */
-    height: 200px; /* Set a fixed height for the container */
+    width: 450px; /* Set a fixed width for the container */
+    height: 350px; /* Set a fixed height for the container */
     overflow: hidden; /* Hide any overflow beyond the specified dimensions */
 }
 
@@ -431,7 +449,10 @@ main {
     object-fit: cover;
 }
 
-
+.description {
+    margin-top: 30px; /* Add margin between profile details and description */
+     /* Optionally italicize the description */
+}
 .product {
     position: relative;
 }
@@ -450,7 +471,7 @@ main {
 }
 
 .product .save-icon.clicked {
-    color: red; /* Change the color when clicked */
+    color: #86B817; /* Change the color when clicked */
 }
 
 
@@ -539,30 +560,65 @@ main {
     color: #666;
 }
 
-
-
-
-
-/* Define animation keyframes */
-@keyframes jig-jag {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(5px);
-    }
-    50% {
-        transform: translateX(-5px);
-    }
-    75% {
-        transform: translateX(5px);
-    }
-    100% {
-        transform: translateX(0);
-    }
+.gallery-filter-container {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding shadow */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Apply animation to product elements */
-.product.animated {
-    animation: jig-jag 0.5s ease-in-out;
+.filter-button {
+    margin-right: 10px; /* Add some spacing between buttons */
+    background-color: #f0f0f0; /* Button background color */
+    border: none;
+    color: #333; /* Button text color */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.filter-button:hover {
+    background-color: #86B817; /* Button background color on hover */
+}
+
+
+.image-container {
+    position: relative;
+}
+
+.slide {
+    display: none;
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 10px;
+    left: 45%;
+    top: 140%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #717171;
+}
+
+
+.image-wrapper img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10%; /* Makes the image circular */
+}
+

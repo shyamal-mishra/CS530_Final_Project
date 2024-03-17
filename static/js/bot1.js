@@ -38,7 +38,7 @@ class Chatbox {
     }
 
     displayInitialMessage(chatbox) {
-        const initialMessage = "Hi. I am ArtiBot! I can make common tasks easier for you";
+        const initialMessage = "Hi. I am UI_530! I can make common tasks easier for you";
         const msg = { name: "Sam", message: initialMessage };
         this.messages.push(msg);
         this.updateChatText(chatbox);

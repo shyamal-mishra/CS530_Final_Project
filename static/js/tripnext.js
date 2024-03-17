@@ -146,7 +146,7 @@
             // Hide the pop-up box after 5 seconds (5000 milliseconds)
             setTimeout(function () {
                 hidePopup(); // Call hidePopup function after 5 seconds
-            }, 2000); // 5000 milliseconds = 5 seconds
+            }, 4000); // 5000 milliseconds = 5 seconds
         }
 
         // Function to hide the pop-up box with fade out effect

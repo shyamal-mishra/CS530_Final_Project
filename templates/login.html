@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tourist - Travel Agency HTML Template</title>
+    <title>CS 530</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -65,20 +65,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link active">Services</a>
-                    <a href="package.html" class="nav-item nav-link">Packages</a>
+                    <a href="/home" class="nav-item nav-link">Home</a>
+                    <a href="/noti" class="nav-item nav-link">Activities</a>
+                  
+                    <a href="/stories" class="nav-item nav-link ">Stories</a>
+                    <a href="/marketplace" class="nav-item nav-link">Contributions</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Help</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="/faq" class="dropdown-item">FAQs</a>
+                            <a href="#Activities" class="dropdown-item">Chat With Us</a>
+
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         {% if login_success %}
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fas fa-user"></i>
                         </a>
-                        <div class="dropdown-menu m-0">
+                       <div class="dropdown-menu m-0">
                             <a href="/profile" class="dropdown-item">Profile</a>
-                            <a href="booking.html" class="dropdown-item">Booking</a>
-                            <a href="team.html" class="dropdown-item">Travel Guides</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="#" class="dropdown-item">Photos</a>
+                            <a href="#" class="dropdown-item"> Trips</a>
+                           
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
                     </div>
@@ -105,6 +114,26 @@
 
     </div>
 
+
+    <div class="container-xxl py-5 px-0 " data-wow-delay="0.1s">
+        <div class="row g-0">
+            <div class="col-md-6 bg-dark d-flex align-items-center">
+                <div class="p-5">
+                   
+                    <h1 class="text-white mb-4">Explore All Expeditions</h1>
+                    <p class="text-white mb-4">At NatureQuest Adventures, we believe in the power of exploration to ignite a passion for conservation. Our website is a haven for 
+                        adventure seekers who crave adrenaline-pumping experiences .</p>
+                    <a href="/noti" class="btn btn-primary py-md-3 px-md-5 me-3">All Activities</a>
+                    <a href="/tripnextpage" class="btn btn-light py-md-3 px-md-5">Join Activities</a>
+                </div>
+            </div>
+            <div class="col-md-6 bg-dark d-flex align-items-center">
+                <div class="p-5">
+                    <img src="static/img/Screenshot 2024-02-24 181013.jpg" alt="Adventures Image" class="img-fluid" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add a container for the overlay and login form -->
 
@@ -254,30 +283,21 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
+             
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+             
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                       
                     </div>
                 </div>
-
-
+                <div class="col-lg-3 col-md-6">
+                
+                </div>
+        
             </div>
         </div>
-
+    
     </div>
     <!-- Footer End -->
 

@@ -35,7 +35,7 @@ app.config['MAIL_PASSWORD'] = 'ofdh pkvc tonk slco'
 mail = Mail(app)
 
 # Absolute path to the database file
-DB_PATH = os.path.join(os.path.dirname(__file__), 'uiflasknew.db')
+DB_PATH = os.path.join(os.path.dirname(__file__), 'uiflasknew3.db')
 
 
 def create_table_user():
@@ -75,13 +75,28 @@ def create_table():
                     image BLOB)''')
     c.execute('''CREATE TABLE IF NOT EXISTS notify (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    sender  TEXT, 
+                    recipient  TEXT, 
                     body  TEXT, 
-                    datetime TEXT
                     username TEXT)''')
     conn.commit()
     conn.close()
     print("Database connected successfully.")
+
+
+def create_wishlist():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS wishlist (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    username TEXT, 
+                    trip_name TEXT, 
+                    trip_date TEXT, 
+                    image BLOB, 
+                    tripURL TEXT)''')
+    conn.commit()
+    conn.close()
+    print("Database connected successfully.")
+
 
 # Route for the homepage
 
@@ -95,39 +110,44 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', login_success=True)
+
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html', login_success=True)
 
 
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', login_success=True)
 
 
 @app.route('/loginpage')
 def loginpage():
-    return render_template('login.html')
+    return render_template('login.html', login_success=True)
 
 # Route for the booking page
 
 
 @app.route('/trippage2')
 def trippage2():
-    return render_template('trippage2.html')
+    return render_template('trippage2.html', login_success=True)
 
 
 @app.route('/trippage3')
 def trippage3():
-    return render_template('trippage3.html')
+    return render_template('trippage3.html', login_success=True)
 
 
 @app.route('/trippage4')
 def trippage4():
-    return render_template('trippage4.html')
+    return render_template('trippage4.html', login_success=True)
 
 
 @app.route('/trippage5')
 def trippage5():
-    return render_template('tripnextpage.html')
+    return render_template('tripnextpage.html', login_success=True)
 
 # Route for the contact page
 
@@ -148,9 +168,29 @@ def destination():
 
 @app.route('/package')
 def package():
-    return render_template('package.html')
+    return render_template('package.html', login_success=True)
 
 # Route for the service page
+
+
+@app.route('/hiking')
+def hiking():
+    return render_template('hiking.html', login_success=True)
+
+
+@app.route('/beachclean')
+def beach():
+    return render_template('beachclean.html', login_success=True)
+
+
+@app.route('/join')
+def join():
+    return render_template('join.html', login_success=True)
+
+
+@app.route('/join2')
+def join2():
+    return render_template('join2.html', login_success=True)
 
 
 @app.route('/service')
@@ -160,22 +200,22 @@ def service():
 
 @app.route('/full-story')
 def fullstory():
-    return render_template('full-story.html')
+    return render_template('full-story.html', login_success=True)
 
 
 @app.route('/sample-story')
 def samplestory():
-    return render_template('sample-story1.html')
+    return render_template('sample-story1.html', login_success=True)
 
 
 @app.route('/sample-story1')
 def samplestory1():
-    return render_template('sample-story2.html')
+    return render_template('sample-story2.html', login_success=True)
 
 
 @app.route('/sample-story2')
 def samplestory2():
-    return render_template('sample-story3.html')
+    return render_template('sample-story3.html', login_success=True)
 
 
 @app.route('/bot')
@@ -187,20 +227,31 @@ def chatbot():
 def index_get():
     return render_template("bot1.html")
 
+
 @app.get("/marketplace")
 def marketplace():
     return render_template("marketplace.html",  login_success=True)
 
 
-@app.get("/product")
+@app.route('/noti')
+def noti():
+    # Get the category parameter from the URL
+    category = request.args.get('category')
+    return render_template('noti.html', login_success=True)
 
+
+@app.get("/product")
 def product():
-    return render_template("product.html", username=session['username'], email=session['email'], login_success=True)
+    if 'username' in session:
+        return render_template("product.html", username=session['username'], email=session['email'], login_success=True)
+    else:
+        return render_template("product.html", login_success=False)
 
 
 def date_function():
     current_datetime = datetime.now()
     return current_datetime
+
 
 @app.route('/send-message', methods=['POST'])
 def send_message():
@@ -209,58 +260,59 @@ def send_message():
     recipient = data['recipient']
     message_body = data['message']
 
-    datetime  = date_function()
+    datetime = date_function()
 
     if 'username' in session:
         # Fetch user details from the database based on the logged-in user
         username = session['username']
 
-    subject = f"Naturequest: {username} sent a message"
+        subject = f"Naturequest: {username} sent a message"
 
-    msg = Message(subject, sender=sender, recipients=[recipient])
-    msg.body = message_body
-    mail.send(msg)
-
-   
-
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("INSERT INTO notify (recipient, body, username) VALUES (?, ?, ?)",
-                      (recipient, message_body, username))
-    conn.commit()
-   
-    conn.close()
-    try:
+        msg = Message(subject, sender=sender, recipients=[recipient])
+        msg.body = message_body
         mail.send(msg)
-        return jsonify({'message': 'Email sent successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("INSERT INTO notify (recipient, body, username) VALUES (?, ?, ?)",
+                  (recipient, message_body, username))
+        conn.commit()
+
+        conn.close()
+        try:
+            mail.send(msg)
+            return jsonify({'message': 'Email sent successfully'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+    else:
+
+        return jsonify({'message': 'kindly login '}), 200
 
 
 @app.route('/get-notifications', methods=['GET'])
 def getnotifications():
 
-        if 'username' in session:
-            # Fetch user details from the database based on the logged-in user
-        
-            email = session['email']
+    if 'username' in session:
+        # Fetch user details from the database based on the logged-in user
+
+        email = session['email']
 
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute("SELECT id, username, body FROM notify WHERE recipient = ? ORDER BY id DESC", (email,))
+        c.execute(
+            "SELECT id, username, body FROM notify WHERE recipient = ? ORDER BY id DESC", (email,))
 
         entries = c.fetchall()
         conn.close()
 
         if entries:
-                # story, name, datetime,image_base64 = story_data
-             return jsonify(entries)
+            # story, name, datetime,image_base64 = story_data
+            return jsonify(entries)
         else:
-             return jsonify([])
-
-    
-
-
+            return jsonify([])
+    else:
+        return jsonify([])
 
 
 # Route for the stories page
@@ -307,9 +359,9 @@ def stories():
 
             if entries:
                 # story, name, datetime,image_base64 = story_data
-                return render_template('stories.html',  entries=entries_dict)
+                return render_template('stories.html',  entries=entries_dict, login_success=True)
             else:
-                return render_template('stories.html', story_text=None, author_name=None, datetime=None)
+                return render_template('stories.html', story_text=None, author_name=None, datetime=None, login_success=True)
 
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
@@ -317,7 +369,7 @@ def stories():
             return redirect(url_for('stories'))
     else:
 
-        return render_template('stories.html')
+        return render_template('stories.html', login_success=True)
 
 
 @app.route('/full-story/<int:story_id>')
@@ -328,7 +380,8 @@ def view_story(story_id):
         return render_template('full-story.html', story=story)
     else:
         return render_template('story-not-found.html')
-    
+
+
 def get_story_by_id(story_id):
 
     conn = sqlite3.connect(DB_PATH)
@@ -338,20 +391,17 @@ def get_story_by_id(story_id):
     conn.close()
 
     if fullstory:
-         
-            story_data = {
-                'id': fullstory[0],
-                'name': fullstory[1],
-                'email': fullstory[2],
-                'datetime': fullstory[3],
-                'location': fullstory[4],
-                'story': fullstory[5],
-                'image_base64': base64.b64encode(fullstory[6]).decode('utf-8') if fullstory[6] else None
-            }
+
+        story_data = {
+            'id': fullstory[0],
+            'name': fullstory[1],
+            'email': fullstory[2],
+            'datetime': fullstory[3],
+            'location': fullstory[4],
+            'story': fullstory[5],
+            'image_base64': base64.b64encode(fullstory[6]).decode('utf-8') if fullstory[6] else None
+        }
     return story_data
-
-
-
 
 
 @app.route('/predict', methods=['POST'])
@@ -359,36 +409,32 @@ def predict():
     data = request.get_json()
     user_message = data['message']
 
-
     url = "https://api.openai.com/v1/chat/completions"
     max_tokens = 50
-  
 
     headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        }
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
 
     data = {
-            "model": "gpt-3.5-turbo",
-            "messages": [{"role": "user", "content": user_message}],
-             "max_tokens": max_tokens
-          
-        }
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": user_message}],
+        "max_tokens": max_tokens
+
+    }
 
     try:
-            response = requests.post(url, json=data, headers=headers)
+        response = requests.post(url, json=data, headers=headers)
 
-            if response.status_code == 200:
-                result = response.json()
-                completion_text = result['choices'][0]['message']['content']
-                return jsonify({'answer': completion_text})
-            else:
-                return jsonify({'error': str(e)})
-    except Exception as e:
+        if response.status_code == 200:
+            result = response.json()
+            completion_text = result['choices'][0]['message']['content']
+            return jsonify({'answer': completion_text})
+        else:
             return jsonify({'error': str(e)})
-
-    
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
 # Route for the team page
@@ -411,7 +457,18 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 
+@app.route('/loginfail')
+def loginfail():
+    return render_template('loginfail.html')
+
+
+@app.route('/signupfail')
+def signupfail():
+    return render_template('signupfail.html')
+
 # Route for the login page
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -434,7 +491,7 @@ def login():
                 return render_template('index.html', login_success=True)
             else:
                 # If user does not exist or password does not match, display error message
-                return jsonify({'success': False})
+                return render_template('loginfail.html', login_success=False)
 
     # If method is not POST or login was unsuccessful, render the login page
     return render_template('index.html', login_success=False)
@@ -451,10 +508,14 @@ def get_user_details(username, email):
         c.execute("SELECT * FROM stories WHERE email=?", (email,))
         story_table_details = c.fetchone()
 
+        # Assuming 'user_id' links the tables
+        c.execute("SELECT * FROM wishlist WHERE username=?", (username,))
+        wishlist = c.fetchall()
+
     # Close the database connection
     conn.close()
 
-    return user_details, story_table_details
+    return user_details, story_table_details, wishlist
 
 
 @app.route('/profile')
@@ -466,7 +527,7 @@ def profile():
         email = session['email']
         # Perform database query to fetch user details based on username
         # Replace this with your actual database query
-        user_details, story_table_details = get_user_details(
+        user_details, story_table_details, wishlist = get_user_details(
             username, email)  # Implement this function
 
         if story_table_details is not None:
@@ -476,6 +537,15 @@ def profile():
             # Convert the image data to base64 encoding
             base64_encoded_image = base64.b64encode(image_data).decode('utf-8')
 
+        if user_details and story_table_details and wishlist:
+            # Render the profile.html template and pass the user details to it
+            return render_template('profile.html', user=user_details, story=base64_encoded_image, wishlist=wishlist, login_success=True)
+
+        if user_details  and wishlist:
+            # Render the profile.html template and pass the user details to it
+            return render_template('profile.html', user=user_details, wishlist=wishlist, login_success=True)
+
+        
         if user_details and story_table_details:
             # Render the profile.html template and pass the user details to it
             return render_template('profile.html', user=user_details, story=base64_encoded_image, login_success=True)
@@ -582,7 +652,7 @@ def signup():
                 c.execute("SELECT * FROM users WHERE email=?", (email,))
                 existing_user = c.fetchone()
                 if existing_user:
-                      return jsonify({'message': 'Username already exists. Please choose a different one.'}), 200
+                    return render_template('signupfail.html',  login_success=True)
                 else:
                     # Insert user data into database
                     c.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
@@ -590,7 +660,7 @@ def signup():
                     conn.commit()  # Commit the transaction
                     flash('User registered successfully!', 'success')
                     print('User registered successfully.')
-                    return render_template('index.html', username=username, login_success=True, first_time_user=True)
+                    return render_template('login.html', username=username,  first_time_user=True)
 
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
@@ -601,7 +671,33 @@ def signup():
 
 @app.route('/tripnextpage')
 def tripnextpage():
-    return render_template('tripnextpage.html')
+    return render_template('tripnextpage.html', login_success=True)
+
+
+@app.route('/wishlist', methods=['POST'])
+def wishlist():
+    # Fetch the user's email from the session
+    username = session.get('username')
+
+    if username:
+        # Retrieve trip details from the request
+        trip_name = request.values.get('tripName')
+        trip_date = request.values.get('date')
+        image = request.values.get('tripImage')
+        tripURL = request.values.get('tripURL')
+
+        # Update trip name and trip date in the users table
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute("INSERT INTO wishlist (trip_name, trip_date, image,tripURL, username) VALUES (?, ?, ?, ?, ?)",
+                      (trip_name, trip_date, image, tripURL, username))
+            conn.commit()
+
+        return 'Wishlist saved'
+    else:
+        # Return a 400 status code for bad request
+
+        return 'User not logged in'
 
 
 @app.route('/save-trip-details', methods=['POST'])
@@ -625,7 +721,8 @@ def save_trip_details():
         return render_template('tripnextpage.html', success=True)
     else:
         # Return a 400 status code for bad request
-        return render_template('tripnextpage.html', success=True)
+
+        return render_template('tripnextpage.html', success=False)
 
 
 @app.route('/logout')
@@ -639,4 +736,5 @@ def logout():
 if __name__ == '__main__':
     create_table()
     create_table_user()
+    create_wishlist()
     app.run(debug=True)

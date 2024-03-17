@@ -216,3 +216,50 @@
 
 
 
+.wishlist {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+/* Style for wishlist item */
+.wishlist-item {
+    width: calc(50% - 10px); /* Each item occupies 50% of the container width with a small gap */
+    margin-bottom: 20px; /* Space between rows */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Style for trip date */
+.wishlist-item .date {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Style for trip details link */
+.wishlist-item .details-link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.wishlist-item .details-link:hover {
+    text-decoration: underline;
+}
+
+

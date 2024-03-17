@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initial sort based on position (assuming "All Listings" is initially selected)
     sortProducts(products);
 
+
+
     filterButtons.forEach(button => {
         button.addEventListener("click", function() {
             const category = this.dataset.category;

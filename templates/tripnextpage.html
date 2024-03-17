@@ -59,17 +59,18 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="/home" class="nav-item nav-link">Home</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
+                    <a href="/noti" class="nav-item nav-link">Activities</a>
+                    <a href="#stories" class="nav-item nav-link ">Stories</a>
+                    <a href="/marketplace" class="nav-item nav-link">Contributions</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activities</a>
+                        
                         <div class="dropdown-menu m-0">
-                            <a href="#uActivities" class="dropdown-item">Upcoming Activities</a>
-                            <a href="#Activities" class="dropdown-item">All Activities</a>
+                            <a href="/faq" class="dropdown-item">FAQs</a>
+                            <a href="#Activities" class="dropdown-item">Chat With Us</a>
 
                         </div>
                     </div>
-                    <a href="#stories" class="nav-item nav-link ">Stories</a>
-                    <a href="#gallery" class="nav-item nav-link">Gallery</a>
+                   
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Help</a>
                         <div class="dropdown-menu m-0">
@@ -84,11 +85,11 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fas fa-user"></i>
                         </a>
-                        <div class="dropdown-menu m-0">
+                       <div class="dropdown-menu m-0">
                             <a href="/profile" class="dropdown-item">Profile</a>
-                            <a href="booking.html" class="dropdown-item">Booking</a>
-                            <a href="team.html" class="dropdown-item">Travel Guides</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="#" class="dropdown-item">Photos</a>
+                            <a href="#" class="dropdown-item"> Trips</a>
+                           
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
                     </div>
@@ -104,13 +105,14 @@
             <div class="container py-5">
                 <div class="row justify-content-center py-5">
                     <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                        <h1 class="display-3 text-white mb-3 animated slideInDown"> Explore, Relax, and Make a
-                            Difference</h1>
-                        <p class="fs-4 text-white mb-4 animated slideInDown">Join Our Expeditions for Adventure and
-                            Environmental Impact!</p>
-                        <div class="position-relative w-75 mx-auto animated slideInDown">
-
-                        </div>
+                        <h1 class="display-3 text-white animated slideInDown">Activity Details</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/noti">All Activities</a></li>
+                                <li class="breadcrumb-item text-white active" aria-current="page">Activity Details</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -124,6 +126,8 @@
         <div class="row">
             <div class="col-md-8">
                 <h1 id="tripName" class="display-4">International Coastal Cleanup Day</h1>
+                <p style="font-size: 1.1em;">Clean Up with Purpose 🌍</p>
+
                 <h2 style="margin-bottom: 90px;">Join us in preserving our coastal ecosystems for future generations
                 </h2>
 
@@ -154,14 +158,14 @@
                     <div class="book-now__info">
                         <div class="book-now__pricing"><span class="book-now__label">Starting from</span>
                             <div class="book-now__editorial"><span class="book-now__editorial--large"
-                                    data-ui="bkns-members-price"> 15th Jun</span> for REI Members </div><span
-                                class="book-now__subtext" data-ui="bkns-nonmembers-price"> 20th Jun for non-members
+                                    data-ui="bkns-members-price"> 20th Mar</span> for REI Members </div><span
+                                class="book-now__subtext" data-ui="bkns-nonmembers-price"> 25th Jun for non-members
                             </span>
                             <!---->
                         </div>
                         <!---->
                         <div class="book-now__departures"><span class="book-now__label">Departures</span><span
-                                class="book-now__editorial" id="tripDate">Jun 2024-Oct 2024</span></div>
+                                class="book-now__editorial" id="tripDate">20th Mar 2024</span></div>
                     </div>
                     <div class="book-now__cta">
                         <div class="book-now__buttons">
@@ -187,15 +191,21 @@
             </div>
             <!-- Itinerary Overview -->
 
-
+     
             <div id="popup"
                 style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); z-index: 9999; width: 400px; height: 100px; text-align: center; justify-content: center; align-items: center;">
-                <p style="margin-bottom: 20px;">Your booking has been confirmed, and a confirmation email has been sent.
+              
+                <p style="margin-bottom: 20px;">Your spot on the expedition is confirmed! We've also sent a confirmation
+                    email , so you can keep track of all the details.
                 </p>
+               
+              
+              
 
             </div>
 
-
+          
+          
 
 
 
@@ -422,7 +432,7 @@
                                             <p>Backpacking: 6.4 miles; elevation gain: 400' elevation.</p>
                                         </div>
                                     </div>
-                                    
+
                                     <!--]-->
                                     <aside class="itinerary__note"><svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24" aria-hidden="true"
@@ -609,38 +619,7 @@
                                                 </svg><!--]--><!--[--><!--]--><!--[--><span>Print gear
                                                     list</span><!--]--><!--[--><!--]--></button>
                                         </div>
-                                        <div class="gear-list__pack-section gear-list__pack-section--contact">
-                                            <h3 class="cdr-text_13-5-2 gear-list__pack-section--contact-title">
-                                                <!--[-->Contact Us
-                                                <!--]-->
-                                            </h3>
-                                            <p class="cdr-text_13-5-2 gear-list__pack-section--contact-body">
-                                                <!--[-->Feel free to give us a call at <span
-                                                    class="hidden-xs">800-622-2236</span>
-                                                <a class="cdr-link_13-5-2 cdr-link--standalone_13-5-2 visible-xs-inline"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    href="tel:+1-800-622-2236">
-                                                    <!--[-->1 (800) 622-2236
-                                                    <!--]-->
-                                                </a> should you have any questions regarding the gear list. The
-                                                staff at our
-                                                stores and Direct Sales ( <span class="hidden-xs">800-426-4840</span>
-                                                <a class="cdr-link_13-5-2 cdr-link--standalone_13-5-2 visible-xs-inline"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    href="tel:+1-800-426-4840">
-                                                    <!--[-->1 (800) 426-4840
-                                                    <!--]-->
-                                                </a> ) will also be happy to help you with gear questions. Or check
-                                                out
-                                                <a class="cdr-link_13-5-2" target="_blank" rel="noopener noreferrer"
-                                                    href="/learn/expert-advice" data-ui="gear-list-expert-advice-link">
-                                                    <!--[-->REI Expert Advice
-                                                    <!--]-->
-                                                </a> , which has great information to help you prepare for your
-                                                trip.
-                                                <!--]-->
-                                            </p>
-                                        </div>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -663,95 +642,27 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Gallery</h4>
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1"
-                                src="{{ url_for('static', filename='img/boating.jpg') }}" alt="">
-
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='img/coral.jpg') }}"
-                                alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='img/hiking.jpg') }}"
-                                alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1"
-                                src="{{ url_for('static', filename='img/beachcleanup.jpg') }}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='img/safari.jpg') }}"
-                                alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='img/rock.jpg') }}"
-                                alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email">
-                        <button type="button"
-                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
+<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+         
+            </div>
+            <div class="col-lg-3 col-md-6">
+         
+                <div class="d-flex pt-2">
+                   
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
-
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-3 col-md-6">
+            
             </div>
+    
         </div>
     </div>
-    <!-- Footer End -->
 
-
+</div>
+<!-- Footer End -->
 
 
     <!-- Back to Top -->
